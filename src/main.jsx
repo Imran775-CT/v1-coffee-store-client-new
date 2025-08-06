@@ -1,29 +1,47 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddCoffee from "./components/AddCoffee";
 import UpdateCoffee from "./components/UpdateCoffee";
 import CoffeeDetails from "./components/CoffeeDetails";
 import ViewDetails from "./components/ViewDetails";
+import AuthProvider from "./providers/AuthProvider";
+
+import Home from "./Home";
+import Main from "./components/Main";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import Users from "./components/Users";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    // loader: () => fetch("http://localhost:5000/coffees"),
+    element: <Main></Main>,
+    children: [
+      { path: "/", element: <Home></Home> },
+      { path: "/addCoffees", element: <AddCoffee></AddCoffee> },
+      { path: "/signin", element: <SignIn /> },
+      { path: "/signup", element: <SignUp /> },
+      {
+        path: "/users",
+        element: <Users></Users>,
+        loader: () => fetch("http://localhost:5000/users"),
+      },
+      {
+        path: "updateCoffee/:id",
+        element: <UpdateCoffee />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/coffees/${params.id}`),
+      },
+    ],
   },
   {
     path: "addCoffees",
-    element: <AddCoffee />,
+    element: <AddCoffee></AddCoffee>,
   },
-  {
-    path: "updateCoffee/:id",
-    element: <UpdateCoffee />,
-    loader: ({ params }) => fetch(`http://localhost:5000/coffees/${params.id}`),
-  },
+
   {
     path: "coffees/:id",
     element: <CoffeeDetails />,
@@ -38,6 +56,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

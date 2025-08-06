@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CoffeeCard from "./components/CoffeeCard";
 
-function App() {
+function Home() {
   // loadedCoffees = useLoaderData(); // usestate er moddhe coffees diye dite hobe..alternative. process.
   const [coffees, setCoffees] = useState([]); // Default to empty array
 
@@ -23,8 +23,6 @@ function App() {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 text-right">☕ Coffee List</h1>
-
       {coffees.length === 0 ? (
         <p>No coffee items available.</p>
       ) : (
@@ -43,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

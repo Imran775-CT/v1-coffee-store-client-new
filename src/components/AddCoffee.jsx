@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 
 const AddCoffee = () => {
   const navigate = useNavigate();
+
   const handleAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +14,7 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photoURL.value;
+
     const newCoffee = {
       name,
       quantity,
@@ -24,9 +26,7 @@ const AddCoffee = () => {
     };
     console.log(newCoffee);
 
-    //  send data to the server
-
-    fetch("http://localhost:5000/coffees", {
+    fetch("http://localhost:5000/addCoffees", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newCoffee),
@@ -46,18 +46,18 @@ const AddCoffee = () => {
         }
       });
   };
-  return (
-    <div className="bg-[#F4F3F0] p-24 ">
-      <h2 className="text-3xl font-extrabold">Add a coffee</h2>
 
-      <form onSubmit={handleAddCoffee}>
-        {/* form row   ,, Name and quantity row*/}
-        <div className="md:flex mb-8">
-          <div className="form-control w-1/2">
+  return (
+    <div className="bg-[#F4F3F0] p-6 md:p-24">
+      <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Add a coffee</h2>
+
+      <form onSubmit={handleAddCoffee} className="space-y-6">
+        {/* row 1 */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Coffee Name</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
@@ -67,11 +67,11 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control w-1/2 ml-4">
+
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Available Quantity</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
@@ -82,13 +82,13 @@ const AddCoffee = () => {
             </label>
           </div>
         </div>
-        {/* form row    Supplier*/}
-        <div className="md:flex mb-8 ">
-          <div className="form-control w-1/2">
+
+        {/* row 2 */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Supplier Name</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
@@ -98,11 +98,11 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control w-1/2 ml-4">
+
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Taste</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
@@ -113,13 +113,13 @@ const AddCoffee = () => {
             </label>
           </div>
         </div>
-        {/* form row */}
-        <div className="md:flex mb-8">
-          <div className="form-control w-1/2">
+
+        {/* row 3 */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
-              <span className="label-text">category</span>
+              <span className="label-text">Category</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
@@ -129,26 +129,27 @@ const AddCoffee = () => {
               />
             </label>
           </div>
-          <div className="form-control w-1/2 ml-4">
+
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Details</span>
             </label>
-            <br />
             <label className="input-group">
               <input
                 type="text"
                 name="details"
-                placeholder="Enter Cofee Details"
+                placeholder="Enter Coffee Details"
                 className="input input-bordered w-full"
               />
             </label>
           </div>
         </div>
+
+        {/* photo URL */}
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Photo Url</span>
+            <span className="label-text">Photo URL</span>
           </label>
-          <br />
           <label className="input-group">
             <input
               type="text"
@@ -158,6 +159,7 @@ const AddCoffee = () => {
             />
           </label>
         </div>
+
         <input
           type="submit"
           value="Add Coffee"

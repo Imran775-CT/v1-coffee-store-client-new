@@ -1,12 +1,12 @@
-import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Header from "./Header";
 
 const UpdateCoffee = () => {
   const navigate = useNavigate();
   const coffee = useLoaderData();
 
-  const { _id, name, quantity, supplier, taste, category, details, photo } =
-    coffee;
+  const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
 
   const handleUpdateCoffee = (e) => {
     e.preventDefault();
@@ -30,7 +30,6 @@ const UpdateCoffee = () => {
       photo: updatedPhoto,
     };
 
-    // **সাবধান: এখানে URL-এ plural ব্যবহার করো**
     fetch(`http://localhost:5000/coffees/${_id}`, {
       method: "PUT",
       headers: {
@@ -62,13 +61,15 @@ const UpdateCoffee = () => {
   };
 
   return (
-    <div className="bg-[#F4F3F0] p-24">
-      <h2 className="text-3xl font-extrabold">Update Coffee: {name}</h2>
+    <div className="bg-[#F4F3F0] p-6 md:p-24">
+      <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
+        Update Coffee: {name}
+      </h2>
 
-      <form onSubmit={handleUpdateCoffee}>
+      <form onSubmit={handleUpdateCoffee} className="space-y-6">
         {/* row 1 */}
-        <div className="md:flex mb-8">
-          <div className="form-control w-1/2">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Coffee Name</span>
             </label>
@@ -80,7 +81,7 @@ const UpdateCoffee = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div className="form-control w-1/2 ml-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Available Quantity</span>
             </label>
@@ -95,8 +96,8 @@ const UpdateCoffee = () => {
         </div>
 
         {/* row 2 */}
-        <div className="md:flex mb-8">
-          <div className="form-control w-1/2">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Supplier Name</span>
             </label>
@@ -108,7 +109,7 @@ const UpdateCoffee = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div className="form-control w-1/2 ml-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Taste</span>
             </label>
@@ -123,8 +124,8 @@ const UpdateCoffee = () => {
         </div>
 
         {/* row 3 */}
-        <div className="md:flex mb-8">
-          <div className="form-control w-1/2">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Category</span>
             </label>
@@ -136,7 +137,7 @@ const UpdateCoffee = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div className="form-control w-1/2 ml-4">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Details</span>
             </label>
@@ -167,7 +168,7 @@ const UpdateCoffee = () => {
         <input
           type="submit"
           value="Update Coffee"
-          className="btn btn-block mt-4"
+          className="btn btn-block mt-2"
         />
       </form>
     </div>
